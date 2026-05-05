@@ -1,0 +1,28 @@
+Service URI
+mysql
+CLICK_TOREVEAL_PASSWORD
+@mysql-1e919b94-vivekgkuliyadi2004-3ef5.d.aivencloud.com24490defaultdbssl-mode=REQUIRED
+
+Database name
+defaultdb
+
+Host
+mysql-1e919b94-vivekgkuliyadi2004-3ef5.d.aivencloud.com
+
+Port
+24490
+
+User
+avnadmin
+
+Password
+AVNS_wUgcCmlVdbKBPRxgxHx
+
+
+
+SSL mode
+REQUIRED
+
+CA certificate
+
+Show
