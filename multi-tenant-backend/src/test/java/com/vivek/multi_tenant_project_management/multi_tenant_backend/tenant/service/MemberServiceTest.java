@@ -1,6 +1,7 @@
 package com.vivek.multi_tenant_project_management.multi_tenant_backend.tenant.service;
 
 import com.vivek.multi_tenant_project_management.multi_tenant_backend.dto.request.MemberInviteRequest;
+import com.vivek.multi_tenant_project_management.multi_tenant_backend.dto.response.MemberInviteResponse;
 import com.vivek.multi_tenant_project_management.multi_tenant_backend.exception.UnauthorizedAccessException;
 import com.vivek.multi_tenant_project_management.multi_tenant_backend.tenant.entity.User;
 import com.vivek.multi_tenant_project_management.multi_tenant_backend.tenant.repository.UserRepository;
@@ -65,10 +66,15 @@ class MemberServiceTest {
         when(userRepository.findByEmail("owner@google.com")).thenReturn(Optional.of(ownerUser));
         when(userRepository.existsByEmail("newmember@google.com")).thenReturn(false);
         when(passwordEncoder.encode(any())).thenReturn("encodedPassword");
-        when(userRepository.save(any(User.class))).thenReturn(memberUser);
+        MemberInviteResponse mockResponse = new MemberInviteResponse();
+        mockResponse.setId(2L);
+        mockResponse.setEmail("newmember@google.com");
+        mockResponse.setFullName("New Member");
+        mockResponse.setRole("MEMBER");
+        mockResponse.setTempPassword("temp1234");
         doNothing().when(auditService).log(any(), any(), any(), any(), any(), any());
 
-        User result = memberService.inviteMember(inviteRequest, "owner@google.com");
+        MemberInviteResponse result = memberService.inviteMember(inviteRequest, "owner@google.com");
 
         assertNotNull(result);
         verify(userRepository, times(1)).save(any(User.class));
